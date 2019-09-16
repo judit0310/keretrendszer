@@ -6,6 +6,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>core</module>
+        <module>service</module>
     </modules>
 
     <groupId>keretrendszer</groupId>
