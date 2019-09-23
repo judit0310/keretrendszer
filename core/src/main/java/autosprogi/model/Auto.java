@@ -1,5 +1,9 @@
 package autosprogi.model;
 
+import autosprogi.exceptions.RosszDatum;
+import autosprogi.exceptions.RosszEvjarat;
+import autosprogi.exceptions.RosszRendszam;
+
 import java.time.LocalDate;
 
 public class Auto {
@@ -17,6 +21,22 @@ public class Auto {
     private Allapot allapot;
 
     public Auto() {
+    }
+
+
+    public Auto(String marka, String tipus, String rendszam, LocalDate uzembehelyezes_datuma, int loero, int suly, int ajtok_szama, int ulesek_szama, int kerek_atmero, int evjarat, String szinkod, Allapot allapot) throws RosszDatum, RosszRendszam, RosszEvjarat {
+        this.marka = marka;
+        this.tipus = tipus;
+        setRendszam(rendszam);
+        setUzembehelyezes_datuma(uzembehelyezes_datuma);
+        this.loero = loero;
+        this.suly = suly;
+        this.ajtok_szama = ajtok_szama;
+        this.ulesek_szama = ulesek_szama;
+        this.kerek_atmero = kerek_atmero;
+        setEvjarat(evjarat);
+        this.szinkod = szinkod;
+        this.allapot = allapot;
     }
 
     public String getMarka() {
@@ -52,7 +72,11 @@ public class Auto {
         return uzembehelyezes_datuma;
     }
 
-    public void setUzembehelyezes_datuma(LocalDate uzembehelyezes_datuma) {
+    public void setUzembehelyezes_datuma(LocalDate uzembehelyezes_datuma) throws RosszDatum {
+        if(uzembehelyezes_datuma.isBefore(LocalDate.MIN) ||
+                uzembehelyezes_datuma.isAfter(LocalDate.now())){
+            throw new RosszDatum(uzembehelyezes_datuma.toString());
+        }
         this.uzembehelyezes_datuma = uzembehelyezes_datuma;
     }
 
@@ -100,7 +124,10 @@ public class Auto {
         return evjarat;
     }
 
-    public void setEvjarat(int evjarat) {
+    public void setEvjarat(int evjarat) throws RosszEvjarat {
+        if(evjarat<0 || evjarat> LocalDate.now().getYear()){
+            throw new RosszEvjarat(String.valueOf(evjarat));
+        }
         this.evjarat = evjarat;
     }
 
