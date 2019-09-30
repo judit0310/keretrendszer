@@ -7,6 +7,7 @@
     <modules>
         <module>core</module>
         <module>service</module>
+        <module>dao-json</module>
     </modules>
 
     <groupId>keretrendszer</groupId>
