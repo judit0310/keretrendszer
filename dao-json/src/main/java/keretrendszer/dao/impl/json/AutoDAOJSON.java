@@ -91,6 +91,14 @@ public class AutoDAOJSON implements AutoDAO {
     }
 
     public void deleteAuto(Auto auto) throws AutoNemTalalhato {
+        Collection<Auto> autok = readAllAutos();
+        try {
+            Auto autotorlendo = readAuto(auto.getRendszam());
+        } catch (RosszRendszam rosszRendszam) {
+            rosszRendszam.printStackTrace();
+        } catch (AutoNemTalalhato nem_talalhato){
+            throw nem_talalhato;
+        }
 
     }
 }
