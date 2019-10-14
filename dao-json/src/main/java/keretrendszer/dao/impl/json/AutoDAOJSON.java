@@ -6,6 +6,7 @@ import autosprogi.exceptions.RosszRendszam;
 import autosprogi.model.Auto;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -25,6 +26,7 @@ public class AutoDAOJSON implements AutoDAO {
         jsonfile = new File(filepath);
         mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
+        mapper.enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
         if (!jsonfile.exists()) {
             try {
                 jsonfile.createNewFile();

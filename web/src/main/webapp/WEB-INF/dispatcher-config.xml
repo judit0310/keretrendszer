@@ -14,4 +14,16 @@
     <context:component-scan base-package="autosprogi.controller"/>
     <context:annotation-config/>
     <mvc:annotation-driven/>
+
+
+
+    <bean id="autoDAOJSON" class="keretrendszer.dao.impl.json.AutoDAOJSON" scope="singleton">
+        <constructor-arg name="filepath" value="database.json"/>
+    </bean>
+
+    <bean class="autosprogi.service.impl.AutoServiceImpl">
+        <constructor-arg name="dao" ref="autoDAOJSON"/>
+    </bean>
+
+
 </beans>
