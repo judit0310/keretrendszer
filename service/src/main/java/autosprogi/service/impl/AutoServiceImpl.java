@@ -24,11 +24,11 @@ public class AutoServiceImpl implements AutoService {
     }
 
     public Auto getAuto(String rendszam) throws RosszRendszam, AutoNemTalalhato {
-        return null;
+        return dao.readAuto(rendszam);
     }
 
     public void addAuto(Auto auto) throws RosszDatum, RosszEvjarat, RosszRendszam {
-
+        dao.insertAuto(auto);
     }
 
     public void deleteAuto(Auto auto) throws AutoNemTalalhato {
