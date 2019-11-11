@@ -1,6 +1,7 @@
 package autosprogi.dao;
 
 import autosprogi.exceptions.AutoNemTalalhato;
+import autosprogi.exceptions.RendszamMarHasznalatban;
 import autosprogi.exceptions.RosszRendszam;
 import autosprogi.model.Auto;
 
@@ -12,7 +13,7 @@ public interface AutoDAO {
 
     public Auto readAuto(String rendszam) throws RosszRendszam, AutoNemTalalhato;
 
-    public void insertAuto(Auto auto);
+    public void insertAuto(Auto auto) throws RendszamMarHasznalatban, RosszRendszam;
 
     public void updateAuto(Auto auto) throws AutoNemTalalhato;
 

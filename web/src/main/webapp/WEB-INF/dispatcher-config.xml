@@ -18,7 +18,7 @@
 
 
     <bean id="autoDAOJSON" class="keretrendszer.dao.impl.json.AutoDAOJSON" scope="singleton">
-        <constructor-arg name="filepath" value="database.json"/>
+        <constructor-arg name="filepath" value="hetfo.json"/>
     </bean>
 
     <bean class="autosprogi.service.impl.AutoServiceImpl">

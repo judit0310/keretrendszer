@@ -1,6 +1,7 @@
 package keretrendszer.dao.impl.json;
 
 import autosprogi.dao.AutoDAO;
+import autosprogi.exceptions.RendszamMarHasznalatban;
 import autosprogi.exceptions.RosszDatum;
 import autosprogi.exceptions.RosszEvjarat;
 import autosprogi.exceptions.RosszRendszam;
@@ -27,6 +28,8 @@ public class AutoDAOJSONTest {
             rosszRendszam.printStackTrace();
         } catch (RosszEvjarat rosszEvjarat) {
             rosszEvjarat.printStackTrace();
+        } catch (RendszamMarHasznalatban rendszamMarHasznalatban) {
+            rendszamMarHasznalatban.printStackTrace();
         }
 
     }

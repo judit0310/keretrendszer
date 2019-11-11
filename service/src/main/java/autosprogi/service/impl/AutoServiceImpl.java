@@ -1,6 +1,7 @@
 package autosprogi.service.impl;
 
 import autosprogi.dao.AutoDAO;
+import autosprogi.exceptions.RendszamMarHasznalatban;
 import autosprogi.exceptions.AutoNemTalalhato;
 import autosprogi.exceptions.RosszDatum;
 import autosprogi.exceptions.RosszEvjarat;
@@ -10,7 +11,6 @@ import autosprogi.service.AutoService;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 public class AutoServiceImpl implements AutoService {
     private AutoDAO dao;
@@ -27,7 +27,8 @@ public class AutoServiceImpl implements AutoService {
         return dao.readAuto(rendszam);
     }
 
-    public void addAuto(Auto auto) throws RosszDatum, RosszEvjarat, RosszRendszam {
+    public void addAuto(Auto auto) throws RosszDatum, RosszEvjarat, RosszRendszam, RendszamMarHasznalatban {
+
         dao.insertAuto(auto);
     }
 

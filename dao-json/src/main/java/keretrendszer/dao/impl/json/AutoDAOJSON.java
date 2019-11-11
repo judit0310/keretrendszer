@@ -1,6 +1,7 @@
 package keretrendszer.dao.impl.json;
 
 import autosprogi.dao.AutoDAO;
+import autosprogi.exceptions.RendszamMarHasznalatban;
 import autosprogi.exceptions.AutoNemTalalhato;
 import autosprogi.exceptions.RosszRendszam;
 import autosprogi.model.Auto;
@@ -68,9 +69,10 @@ public class AutoDAOJSON implements AutoDAO {
         throw new AutoNemTalalhato();
 }
 
-    public void insertAuto(Auto auto) {
+    public void insertAuto(Auto auto) throws RendszamMarHasznalatban, RosszRendszam {
         try{
             readAuto(auto.getRendszam());
+            throw new RendszamMarHasznalatban(auto.getRendszam());
         } catch (AutoNemTalalhato autoNemTalalhato) {
             Collection<Auto> autos = readAllAutos();
             autos.add(auto);
@@ -82,8 +84,6 @@ public class AutoDAOJSON implements AutoDAO {
             return;
 
 
-        } catch (RosszRendszam rosszRendszam) {
-            ;
         }
 
     }

@@ -1,10 +1,7 @@
 package autosprogi.service;
 
-import autosprogi.exceptions.AutoNemTalalhato;
+import autosprogi.exceptions.*;
 import autosprogi.model.Auto;
-import autosprogi.exceptions.RosszDatum;
-import autosprogi.exceptions.RosszEvjarat;
-import autosprogi.exceptions.RosszRendszam;
 
 import java.util.Collection;
 
@@ -13,7 +10,7 @@ public interface AutoService {
 
     public Auto getAuto(String rendszam) throws RosszRendszam, AutoNemTalalhato;
 
-    public void addAuto(Auto auto) throws RosszDatum, RosszEvjarat, RosszRendszam;
+    public void addAuto(Auto auto) throws RosszDatum, RosszEvjarat, RosszRendszam, RendszamMarHasznalatban;
 
     public void deleteAuto(Auto auto) throws AutoNemTalalhato;
 

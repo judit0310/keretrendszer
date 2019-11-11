@@ -1,5 +1,6 @@
 package autosprogi.controller;
 
+import autosprogi.exceptions.RendszamMarHasznalatban;
 import autosprogi.exceptions.AutoNemTalalhato;
 import autosprogi.exceptions.RosszDatum;
 import autosprogi.exceptions.RosszEvjarat;
@@ -7,11 +8,12 @@ import autosprogi.exceptions.RosszRendszam;
 import autosprogi.model.Auto;
 import autosprogi.service.AutoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
+import java.util.Collection;
 
 @Controller
 public class AutoController {
@@ -42,8 +44,17 @@ public class AutoController {
 
     @RequestMapping(value ="addAuto", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public void addAuto(@RequestBody Auto auto) throws RosszDatum, RosszEvjarat, RosszRendszam {
+    public void addAuto(@RequestBody Auto auto) throws RosszDatum, RosszEvjarat, RosszRendszam, RendszamMarHasznalatban {
         service.addAuto(auto);
 
     }
+
+    @RequestMapping(value = "/listAuto", method = RequestMethod.GET)
+    @ResponseBody
+    public Collection<Auto> listAuto(){
+        return service.listAllAutos();
+
+    }
+
+
 }
