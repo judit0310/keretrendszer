@@ -15,10 +15,11 @@ public class ExceptionController {
     @ResponseBody
     @ResponseStatus(HttpStatus.IM_USED)
     public String duplikalt(RendszamMarHasznalatban e){
-        return e.getMessage()+", nem update kellene?";
+        return e.getMessage()+", nem update kellene?"+e.toString();
 
     }
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+    @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
     @ResponseBody
     public String unsupoorted(){
         return "elfogadhato media tipusok:"+ MediaType.APPLICATION_JSON_VALUE;

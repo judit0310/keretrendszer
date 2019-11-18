@@ -5,6 +5,7 @@ import autosprogi.exceptions.RendszamMarHasznalatban;
 import autosprogi.exceptions.AutoNemTalalhato;
 import autosprogi.exceptions.RosszRendszam;
 import autosprogi.model.Auto;
+import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -13,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,6 +33,9 @@ public class AutoDAOJSON implements AutoDAO {
         if (!jsonfile.exists()) {
             try {
                 jsonfile.createNewFile();
+                FileWriter writer = new FileWriter(jsonfile);
+                writer.write("[]");
+                writer.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -89,6 +94,25 @@ public class AutoDAOJSON implements AutoDAO {
     }
 
     public void updateAuto(Auto auto) throws AutoNemTalalhato {
+        Collection<Auto> autok = readAllAutos();
+        try {
+            Auto autotorlendo = readAuto(auto.getRendszam());
+            autok.remove(autotorlendo);
+            autok.add(auto);
+            mapper.writeValue(jsonfile, autok);
+        } catch (RosszRendszam rosszRendszam) {
+            rosszRendszam.printStackTrace();
+        } catch (AutoNemTalalhato nem_talalhato){
+            throw nem_talalhato;
+        } catch (JsonGenerationException e) {
+            e.printStackTrace();
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
 
     }
 
@@ -96,10 +120,18 @@ public class AutoDAOJSON implements AutoDAO {
         Collection<Auto> autok = readAllAutos();
         try {
             Auto autotorlendo = readAuto(auto.getRendszam());
+            autok.remove(autotorlendo);
+            mapper.writeValue(jsonfile, autok);
         } catch (RosszRendszam rosszRendszam) {
             rosszRendszam.printStackTrace();
         } catch (AutoNemTalalhato nem_talalhato){
             throw nem_talalhato;
+        } catch (JsonGenerationException e) {
+            e.printStackTrace();
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }

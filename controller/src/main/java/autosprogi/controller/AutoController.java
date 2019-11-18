@@ -24,6 +24,7 @@ public class AutoController {
     }
 
     @RequestMapping(value = "cica")
+    @ResponseBody
     public void proba(){
         System.out.println("ITT VAGYOk");
     }
@@ -54,6 +55,18 @@ public class AutoController {
     public Collection<Auto> listAuto(){
         return service.listAllAutos();
 
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    @ResponseBody
+    public void deleteAuto(@RequestBody Auto auto) throws AutoNemTalalhato {
+        service.deleteAuto(auto);
+    }
+
+    @RequestMapping(value = "/update", method= RequestMethod.POST)
+    @ResponseBody
+    public void updateAuto(@RequestBody Auto auto) throws AutoNemTalalhato {
+        service.updateAuto(auto);
     }
 
 

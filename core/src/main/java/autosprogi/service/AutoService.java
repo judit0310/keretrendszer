@@ -17,4 +17,6 @@ public interface AutoService {
     public Collection<Auto> listAllAutosByManufacturer(String manufacturer);
 
 
+    public void updateAuto(Auto auto) throws AutoNemTalalhato;
+
 }

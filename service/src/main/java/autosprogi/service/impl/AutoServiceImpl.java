@@ -33,7 +33,7 @@ public class AutoServiceImpl implements AutoService {
     }
 
     public void deleteAuto(Auto auto) throws AutoNemTalalhato {
-
+        dao.deleteAuto(auto);
 
     }
 
@@ -48,5 +48,10 @@ public class AutoServiceImpl implements AutoService {
 
         }
         return result;
+    }
+
+    @Override
+    public void updateAuto(Auto auto) throws AutoNemTalalhato {
+        dao.updateAuto(auto);
     }
 }

@@ -5,6 +5,7 @@ import autosprogi.exceptions.RosszEvjarat;
 import autosprogi.exceptions.RosszRendszam;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Auto {
     private String marka;
@@ -163,5 +164,29 @@ public class Auto {
                 ", szinkod='" + szinkod + '\'' +
                 ", allapot=" + allapot +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Auto auto = (Auto) o;
+        return loero == auto.loero &&
+                suly == auto.suly &&
+                ajtok_szama == auto.ajtok_szama &&
+                ulesek_szama == auto.ulesek_szama &&
+                kerek_atmero == auto.kerek_atmero &&
+                evjarat == auto.evjarat &&
+                Objects.equals(marka, auto.marka) &&
+                Objects.equals(tipus, auto.tipus) &&
+                Objects.equals(rendszam, auto.rendszam) &&
+                Objects.equals(uzembehelyezes_datuma, auto.uzembehelyezes_datuma) &&
+                Objects.equals(szinkod, auto.szinkod) &&
+                allapot == auto.allapot;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(marka, tipus, rendszam, uzembehelyezes_datuma, loero, suly, ajtok_szama, ulesek_szama, kerek_atmero, evjarat, szinkod, allapot);
     }
 }
